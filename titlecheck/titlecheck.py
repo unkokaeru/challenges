@@ -1,4 +1,4 @@
-"""A module for checking if a string is a title."""
+"""titlecheck.py: A module for checking if a string is a title."""
 
 
 def is_title(string_to_check: str) -> bool:
@@ -40,6 +40,7 @@ def is_title(string_to_check: str) -> bool:
     completes without returning False, then the
     function returns True.
     """
+
     def is_letter(char: str) -> bool:
         """
         Check if a character is a letter.
@@ -93,60 +94,21 @@ def is_title(string_to_check: str) -> bool:
             if is_letter(char) and not is_uppercase(char):
                 return False
         elif char == " ":
-            if is_letter(string_to_check[i + 1]) and not is_uppercase(string_to_check[i + 1]):
+            if is_letter(string_to_check[i + 1]) and not is_uppercase(
+                string_to_check[i + 1]
+            ):
                 return False
 
     return True
 
 
-def test_is_title(TEST_CASES: list[tuple[str, bool]]) -> bool:
-    """
-    Test the is_title function with the given
-    test cases.
-
-    Parameters
-    ----------
-    TEST_CASES : list[tuple[str, bool]]
-        The test cases to be used, in the format
-        [(string, expected_result), ...].
-
-    Returns
-    -------
-    bool
-        True if all test cases pass, False otherwise.
-
-    Examples
-    --------
-    >>> test_is_title([
-    ...     ("A Mind Boggling Achievement", True),
-    ...     ("A Simple C++ Program!", True),
-    ...     ("Water is transparent", False),
-    ... ])
-    True
-    """
-    for string, expected_result in TEST_CASES:
-        result = is_title(string)
-        if result != expected_result:
-            print(f"Failed for string: '{string}' - Expected {expected_result}, but got {result}.")
-            return False
-
-    return True
-
-
-def main() -> None:
-    """
-    Tests the is_title function with the given
-    test cases.
-    """
-    TEST_CASES: list[tuple[str, bool]] = [
-        ("A Mind Boggling Achievement", True),
-        ("A Simple C++ Program!", True),
-        ("Water is transparent", False),
-    ]  # string, expected result
-
-    if test_is_title(TEST_CASES):
-        print("All test cases passed!")
+def test_is_title() -> None:
+    """Test the is_title function."""
+    assert is_title("A Mind Boggling Achievement")
+    assert is_title("A Simple C++ Program!")
+    assert not is_title("Water is transparent")
 
 
 if __name__ == "__main__":
-    main()
+    test_is_title()
+    print("All tests passed!")
